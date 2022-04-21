@@ -10,8 +10,6 @@
 
 ThisOutlookSession  ~ マクロ自動実行 ~
 
-https://docs.microsoft.com/ja-jp/office/vba/api/outlook.olobjectclass
-
 AutoSave2 ~ 標準モジュール ~
 
 ----------------------------------------------------------------------
@@ -32,5 +30,10 @@ AutoSave2 ~ 標準モジュール ~
 5.FileSystemObjectの追加
 ファイル操作する為に、ライブラリを追加する
 
+------------------------------------------------------------
+
 参考記事
-https://www.tipsfound.com/vba/18001
+
+[マクロの自動化方法](https://extan.jp/?p=866&cpage=1&unapproved=1125&moderation-hash=02ff48a4830507554d307dde3b90caf0#:~:text=%E3%81%93%E3%81%AE%E3%83%9E%E3%82%AF%E3%83%AD%E3%82%92ThisOutlookSession%E3%81%AB%E8%BF%BD%E5%8A%A0)
+
+[FileSystemObjectの追加](https://www.tipsfound.com/vba/18001)
