@@ -1,0 +1,138 @@
+Option Explicit
+Sub File_Autosave()
+    Dim start As Double
+    start = Timer
+    
+    Call Filedel
+    Dim objInbox As Object
+    Dim objFolder As Object
+    Dim objItem As Object
+    Dim strPath As String
+    Dim i As Long
+    Dim j As Variant
+     
+    Set objInbox = GetNamespace("MAPI").GetDefaultFolder(olFolderInbox)
+    
+    '添付ファイルがあるメールフォルダを指定
+    Set objFolder = objInbox.Folders.Item("評価案件").Folders.Item("渡辺").Folders.Item("TEL")
+    
+    '添付ファイルの保存先を指定
+    strPath = "C:\Users\tosaka\Documents\Mail_Files\"
+     
+    For Each objItem In objFolder.Items
+        For i = 1 To objItem.Attachments.Count
+        
+            '指定した拡張子をDLする
+            If InStr(objItem.Attachments.Item(i), ".xlsx") <> 0 Then
+                objItem.Attachments.Item(i).SaveAsFile strPath & objItem.Attachments.Item(i)
+            End If
+            
+            If InStr(objItem.Attachments.Item(i), ".pptx") <> 0 Then
+                objItem.Attachments.Item(i).SaveAsFile strPath & objItem.Attachments.Item(i)
+            End If
+            
+            If InStr(objItem.Attachments.Item(i), ".pdf") <> 0 Then
+                objItem.Attachments.Item(i).SaveAsFile strPath & objItem.Attachments.Item(i)
+            End If
+        Next i
+    Next objItem
+    
+    'Fileの移動
+    Call move_files1
+    Call move_files2
+    Call move_files3
+ 
+    Set objItem = Nothing
+    Set objInbox = Nothing
+    Set objFolder = Nothing
+    
+    Debug.Print Format(Timer - start, "0.00sec")
+End Sub
+Sub move_files1()
+    Dim fso As New Scripting.FileSystemObject
+    Dim sourceFile As String
+    Dim destinationFile As String
+    Dim currentdir As String
+    
+    
+    sourceFile = "C:\Users\tosaka\Documents\Mail_Files\*.xlsx"
+    destinationFile = "C:\Users\tosaka\Documents\Mail_Files\Excel"
+    currentdir = "C:\Users\tosaka\Documents\Mail_Files"
+    
+    If (currentdir) <> "" Then
+        fso.MoveFile sourceFile, destinationFile
+    End If
+    
+    Set fso = Nothing
+    
+End Sub
+Sub move_files2()
+    Dim fso As New Scripting.FileSystemObject
+    Dim sourceFile As String
+    Dim destinationFile As String
+    Dim currentdir As String
+    
+    
+    sourceFile = "C:\Users\tosaka\Documents\Mail_Files\*.pdf"
+    destinationFile = "C:\Users\tosaka\Documents\Mail_Files\PDF"
+    currentdir = "C:\Users\tosaka\Documents\Mail_Files"
+    
+    If (currentdir) <> "" Then
+        fso.MoveFile sourceFile, destinationFile
+    End If
+    
+    Set fso = Nothing
+End Sub
+Sub move_files3()
+    Dim fso As New Scripting.FileSystemObject
+    Dim sourceFile As String
+    Dim destinationFile As String
+    Dim currentdir As String
+    
+    
+    sourceFile = "C:\Users\tosaka\Documents\Mail_Files\*.pptx"
+    destinationFile = "C:\Users\tosaka\Documents\Mail_Files\powerpoint"
+    currentdir = "C:\Users\tosaka\Documents\Mail_Files"
+    
+    If (currentdir) <> "" Then
+        fso.MoveFile sourceFile, destinationFile
+    End If
+    
+    Set fso = Nothing
+End Sub
+Sub Filedel()
+    On Error Resume Next
+    
+    Const cnsSOUR1 As String = "C:\Users\tosaka\Documents\Mail_Files\Excel\*.xlsx"
+    Const cnsSOUR2 As String = "C:\Users\tosaka\Documents\Mail_Files\Powerpoint\*.pptx"
+    Const cnsSOUR3 As String = "C:\Users\tosaka\Documents\Mail_Files\PDF\*.pdf"
+    
+    Dim objFso As FileSystemObject
+    Set objFso = New FileSystemObject
+    Dim destinationFile1 As String
+    Dim destinationFile2 As String
+    Dim destinationFile3 As String
+    
+    destinationFile1 = "C:\Users\tosaka\Documents\Mail_Files\Excel"
+    destinationFile2 = "C:\Users\tosaka\Documents\Mail_Files\Powerpoint"
+    destinationFile3 = "C:\Users\tosaka\Documents\Mail_Files\PDF"
+    
+    ' FSOによるファイル削除
+    If (destinationFile1) <> "" Then
+        objFso.DeleteFile cnsSOUR1
+        Else
+    End If
+    
+    ' FSOによるファイル削除
+    If (destinationFile2) <> "" Then
+        objFso.DeleteFile cnsSOUR2
+        Else
+    End If
+    
+    If (destinationFile3) <> "" Then
+        objFso.DeleteFile cnsSOUR3
+        Else
+    End If
+    
+    Set objFso = Nothing
+End Sub
