@@ -1,0 +1,18 @@
+Option Explicit
+Private Sub Application_Reminder(ByVal objItem As Object)
+    
+    'マクロの自動実行
+    Dim strItemSubject As String
+
+    '予定アイテムの件名を指定します。
+    strItemSubject = "File DL test"
+
+    If objItem.Subject = strItemSubject And objItem.Class = "26" Then
+    '予定アイテムの件名とアイテムのオブジェクトクラスが”olAppointment”（26番）だった場合の条件を設定します。
+    'https://docs.microsoft.com/ja-jp/office/vba/api/outlook.olobjectclass
+
+    '起動したいプロシージャを指定します。
+    Call File_Autosave
+    End If
+    
+End Sub
