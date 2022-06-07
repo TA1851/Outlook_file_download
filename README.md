@@ -6,8 +6,6 @@
 
 ---
 
-### Module & MacroName
-
 #### ThisOutlookSession  ~ マクロ自動実行処理 ~
 
 * Outlookの予定アイテム件名を指定し、条件を満たすとアラームをトリガーとしマクロを呼びだし実行する
