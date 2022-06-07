@@ -14,10 +14,10 @@ Sub File_Autosave()
     Set objInbox = GetNamespace("MAPI").GetDefaultFolder(olFolderInbox)
     
     '添付ファイルがあるメールフォルダを指定
-    Set objFolder = objInbox.Folders.Item("評価案件").Folders.Item("渡辺").Folders.Item("TEL")
+    Set objFolder = objInbox.Folders.Item("XXX").Folders.Item("XXX").Folders.Item("XXX")
     
     '添付ファイルの保存先を指定
-    strPath = "C:\Users\tosaka\Documents\Mail_Files\"
+    strPath = "C:\Users\xxxxx\Documents\xxxx\"
      
     For Each objItem In objFolder.Items
         For i = 1 To objItem.Attachments.Count
@@ -55,9 +55,9 @@ Sub move_files1()
     Dim currentdir As String
     
     
-    sourceFile = "C:\Users\tosaka\Documents\Mail_Files\*.xlsx"
-    destinationFile = "C:\Users\tosaka\Documents\Mail_Files\Excel"
-    currentdir = "C:\Users\tosaka\Documents\Mail_Files"
+    sourceFile = "C:\Users\xxxxx\Documents\xxxx\*.xlsx"      'フォルダ内にあるExcelファイルを移動
+    destinationFile = "C:\Users\xxxxx\Documents\xxxx\Excel"  '移動先のPathを指定
+    currentdir = "C:\Users\xxxxx\Documents\xxxx"             '移動元のPathを指定
     
     If (currentdir) <> "" Then
         fso.MoveFile sourceFile, destinationFile
@@ -73,9 +73,9 @@ Sub move_files2()
     Dim currentdir As String
     
     
-    sourceFile = "C:\Users\tosaka\Documents\Mail_Files\*.pdf"
-    destinationFile = "C:\Users\tosaka\Documents\Mail_Files\PDF"
-    currentdir = "C:\Users\tosaka\Documents\Mail_Files"
+    sourceFile = "C:\Users\xxxxx\Documents\xxxx\*.pdf"      'フォルダ内にあるExcelファイルを移動
+    destinationFile = "C:\Users\xxxxx\Documents\xxxx\PDF"   '移動先のPathを指定
+    currentdir = "C:\Users\xxxxx\Documents\xxxx"            '移動元のPathを指定
     
     If (currentdir) <> "" Then
         fso.MoveFile sourceFile, destinationFile
@@ -90,10 +90,10 @@ Sub move_files3()
     Dim currentdir As String
     
     
-    sourceFile = "C:\Users\tosaka\Documents\Mail_Files\*.pptx"
-    destinationFile = "C:\Users\tosaka\Documents\Mail_Files\powerpoint"
-    currentdir = "C:\Users\tosaka\Documents\Mail_Files"
-    
+    sourceFile = "C:\Users\xxxxx\Documents\xxxx\*.pptx"           'フォルダ内にあるExcelファイルを移動
+    destinationFile = "C:\Users\xxxxx\Documents\xxxx\powerpoint"  '移動先のPathを指定
+    currentdir = "C:\Users\xxxxx\Documents\xxxx"                  '移動元のPathを指定
+     
     If (currentdir) <> "" Then
         fso.MoveFile sourceFile, destinationFile
     End If
@@ -103,9 +103,9 @@ End Sub
 Sub Filedel()
     On Error Resume Next
     
-    Const cnsSOUR1 As String = "C:\Users\tosaka\Documents\Mail_Files\Excel\*.xlsx"
-    Const cnsSOUR2 As String = "C:\Users\tosaka\Documents\Mail_Files\Powerpoint\*.pptx"
-    Const cnsSOUR3 As String = "C:\Users\tosaka\Documents\Mail_Files\PDF\*.pdf"
+    Const cnsSOUR1 As String = "C:\Users\xxxxx\Documents\xxxx\*.xlsx"  'フォルダ内にあるExcelファイルを移動
+    Const cnsSOUR2 As String = "C:\Users\xxxxx\Documents\xxxx\*.pptx"  '移動先のPathを指定
+    Const cnsSOUR3 As String = "C:\Users\xxxxx\Documents\xxxx\*.pdf"   '移動元のPathを指定
     
     Dim objFso As FileSystemObject
     Set objFso = New FileSystemObject
@@ -113,9 +113,9 @@ Sub Filedel()
     Dim destinationFile2 As String
     Dim destinationFile3 As String
     
-    destinationFile1 = "C:\Users\tosaka\Documents\Mail_Files\Excel"
-    destinationFile2 = "C:\Users\tosaka\Documents\Mail_Files\Powerpoint"
-    destinationFile3 = "C:\Users\tosaka\Documents\Mail_Files\PDF"
+    destinationFile1 = "C:\Users\xxxxx\Documents\xxxx\Excel"       'フォルダ内にあるExcelファイルを移動
+    destinationFile2 = "C:\Users\xxxxx\Documents\xxxx\Powerpoint"  '移動先のPathを指定
+    destinationFile3 = "C:\Users\xxxxx\Documents\xxxx\PDF"         '移動元のPathを指定
     
     ' FSOによるファイル削除
     If (destinationFile1) <> "" Then
