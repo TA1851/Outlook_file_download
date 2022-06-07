@@ -22,6 +22,12 @@ MacroName -> AutoSave2.bas
 * Downloadファイルの保存先は、ドキュメントフォルダを指定
 
 ---
+Mail_list.bas -> 改訂版Macro(MacroName:File_Auto_Saving)
+
+* ダウンロードしたファイルをOneDriveに移動させる
+* ダウンロードしたファイルとメールをLinkさせる（Excelファイルへの書き出し）
+
+---
 #### Requirement
 
 * Library list
