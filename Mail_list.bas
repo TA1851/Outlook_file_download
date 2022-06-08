@@ -2,7 +2,7 @@ Attribute VB_Name = "Mail_list"
 Option Explicit
 Sub File_Auto_Saving()
     
-    Call Filedel1  'ãƒ•ã‚¡ã‚¤ãƒ«ã®ä¿å­˜çŠ¶æ…‹ã‚’å¸¸ã«æœ€æ–°ã«ä¿ã¤
+    Call Filedel1  'ƒtƒ@ƒCƒ‹‚Ì•Û‘¶ó‘Ô‚ğí‚ÉÅV‚É•Û‚Â
     Call Filedel2
     
     Dim objInbox As Object
@@ -10,58 +10,63 @@ Sub File_Auto_Saving()
     Dim strPath As String
     Dim i As Long
     Dim objItem As Object
+    Dim OneDrive_Path As String
     
-    'Excelç”¨å®šç¾©
+    'Excel—p’è‹`
     Dim myExcel As Excel.Application
     Dim objBook As Excel.Workbook
     Dim objSheet As Excel.Worksheet
     Dim n As Long
     
-    'Excelã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆç”Ÿæˆã€ãƒ–ãƒƒã‚¯ã®è¿½åŠ 
+    'ExcelƒIƒuƒWƒFƒNƒg¶¬AƒuƒbƒN‚Ì’Ç‰Á
     Set myExcel = CreateObject("Excel.Application")
     Set objBook = myExcel.Workbooks.Add()
     Set objSheet = objBook.Sheets(1)
 
-    'é …ç›®ç›®ã‚’è¿½åŠ 
+    '€–Ú–Ú‚ğ’Ç‰Á
     objSheet.Cells(1, 1) = "subject"
     objSheet.Cells(1, 2) = "To"
     objSheet.Cells(1, 3) = "Date"
     objSheet.Cells(1, 4) = "Files"
     objSheet.Cells(1, 5) = "File_Path"
     
-    'æ·»ä»˜ãƒ•ã‚¡ã‚¤ãƒ«ãƒªã‚¹ãƒˆã‚’æ›¸ãè¾¼ã‚€è¡Œã®ä½ç½®
+    '“Y•tƒtƒ@ƒCƒ‹ƒŠƒXƒg‚ğ‘‚«‚Şs‚ÌˆÊ’u
     n = 2
     
-     
     Set objInbox = GetNamespace("MAPI").GetDefaultFolder(olFolderInbox)
     
-    'æ·»ä»˜ãƒ•ã‚¡ã‚¤ãƒ«ãŒã‚ã‚‹ãƒ¡ãƒ¼ãƒ«ã®ãƒ•ã‚©ãƒ«ãƒ€ã‚’æŒ‡å®šã—ã¾ã™ã€‚2éšå±¤ä»¥ä¸Šã‚ã‚‹å ´åˆã¯ã€Œ.Folders.Item(ï¼œãƒ•ã‚©ãƒ«ãƒ€åï¼)ã€ã‚’è¿½åŠ ã—ã¦ãã ã•ã„ã€‚
-    Set objFolder = objInbox.Folders.Item("xxxx").Folders.Item("xxx").Folders.Item("xxx")
+    '“Y•tƒtƒ@ƒCƒ‹‚ª‚ ‚éƒ[ƒ‹‚ÌƒtƒHƒ‹ƒ_‚ğw’è‚µ‚Ü‚·B2ŠK‘wˆÈã‚ ‚éê‡‚Íu.Folders.Item(ƒƒtƒHƒ‹ƒ_–¼„)v‚ğ’Ç‰Á‚µ‚Ä‚­‚¾‚³‚¢B
+    Set objFolder = objInbox.Folders.Item("•]‰¿ˆÄŒ").Folders.Item("“n•Ó").Folders.Item("TEL")
     
-    'æ·»ä»˜ãƒ•ã‚¡ã‚¤ãƒ«ã®ä¿å­˜å…ˆã‚’ãƒ‘ã‚¹ã§æŒ‡å®šã—ã¾ã™ã€‚
-    strPath = "C:\Users\xxxx\Documents\Mail_Files\test\"
+    '“Y•tƒtƒ@ƒCƒ‹‚Ì•Û‘¶æ‚ğƒpƒX‚Åw’è‚µ‚Ü‚·B
+    strPath = "C:\Users\tosaka\Documents\Mail_Files\"
+    OneDrive_Path = "C:\Users\tosaka\OneDrive - Micron Technology, Inc\mail_files\"
      
     For Each objItem In objFolder.Items
         For i = 1 To objItem.Attachments.Count
-            'æ·»ä»˜ãƒ•ã‚¡ã‚¤ãƒ«ã«æ‹¡å¼µå­ãŒã‚ã‚‹å ´åˆã®ã¿å‡¦ç†ã—ã¾ã™ã€‚
+            '“Y•tƒtƒ@ƒCƒ‹‚ÉŠg’£q‚ª‚ ‚éê‡‚Ì‚İˆ—‚µ‚Ü‚·B
             If InStr(objItem.Attachments.Item(i), ".xlsx") <> 0 Then
                 objItem.Attachments.Item(i).SaveAsFile strPath & objItem.Attachments.Item(i)
                 
-                'Excelã¸æ·»ä»˜ãƒ•ã‚¡ã‚¤ãƒ«æƒ…å ±ã‚’è¿½åŠ 
-                objSheet.Cells(n, 1) = objItem.ConversationTopic 'ä»¶å
-                objSheet.Cells(n, 2) = objItem.SenderName 'é€ä¿¡è€…
-                objSheet.Cells(n, 3) = objItem.ReceivedTime 'å—ä¿¡æ—¥æ™‚
-                objSheet.Cells(n, 4) = objItem.Attachments.Item(i) 'æ·»ä»˜ãƒ•ã‚¡ã‚¤ãƒ«
-                objSheet.Cells(n, 5) = strPath & objItem.Attachments.Item(i) 'æ·»ä»˜ãƒ•ã‚¡ã‚¤ãƒ«ã®ãƒ‘ã‚¹"
+                'Excel‚Ö“Y•tƒtƒ@ƒCƒ‹î•ñ‚ğ’Ç‰Á
+                objSheet.Cells(n, 1) = objItem.ConversationTopic 'Œ–¼
+                objSheet.Cells(n, 2) = objItem.SenderName '‘—MÒ
+                objSheet.Cells(n, 3) = objItem.ReceivedTime 'óM“ú
+                objSheet.Cells(n, 4) = objItem.Attachments.Item(i) '“Y•tƒtƒ@ƒCƒ‹
+                objSheet.Cells(n, 5) = OneDrive_Path & objItem.Attachments.Item(i) '“Y•tƒtƒ@ƒCƒ‹‚ÌƒpƒX"
                 n = n + 1
             End If
         Next i
+    
     Next objItem
- 
-    'æ·»ä»˜ãƒ•ã‚¡ã‚¤ãƒ«ä¿å­˜å ´æ‰€ã¸Excelã‚’ä¿å­˜ã€€â€»ãƒ•ã‚¡ã‚¤ãƒ«åã¯é©å½“ãªåå‰ã«å¤‰ãˆã¦ãã ã•ã„ã€‚
-    objBook.SaveAs strPath & "file_list.xlsx"
+    
+    
+    objBook.SaveAs strPath & "file_list.xlsx"  '“Y•tƒtƒ@ƒCƒ‹‚ğw’è•Û‘¶êŠ‚Ö•Û‘¶
+    
+    'ƒtƒ@ƒCƒ‹‚ğ•Â‚¶‚ÄAExcel‚ÌProcess‚ğI—¹‚·‚é
+    objBook.Close
     myExcel.Application.Quit
- 
+    
     Set objItem = Nothing
     Set objInbox = Nothing
     Set objFolder = Nothing
@@ -75,71 +80,73 @@ End Sub
 Sub Filedel1()
     On Error Resume Next
     
-    Const cnsSOUR1 As String = "C:\Users\xxxx\OneDrive\test\Excel\*.xlsx"
+    Const cnsSOUR1 As String = "C:\Users\tosaka\OneDrive - Micron Technology, Inc\mail_files\*.xlsx"
     
     Dim objFso As FileSystemObject
     Set objFso = New FileSystemObject
     Dim destinationFile1 As String
-    Dim destinationFile2 As String
     
-    destinationFile1 = "C:\Users\xxxx\OneDrive\test\Excel"
+    destinationFile1 = "C:\Users\tosaka\OneDrive - Micron Technology, Inc\mail_files\"
     
-    ' FSOã«ã‚ˆã‚‹ãƒ•ã‚¡ã‚¤ãƒ«å‰Šé™¤
+    ' FSO‚É‚æ‚éƒtƒ@ƒCƒ‹íœ
     If (destinationFile1) <> "" Then
         objFso.DeleteFile cnsSOUR1
         Else
     End If
     
     Set objFso = Nothing
+    
 End Sub
 Sub Filedel2()
     On Error Resume Next
     
-    Const cnsSOUR1 As String = "C:\Users\xxxx\OneDrive\test\PDF\*.pdf"
+    Const cnsSOUR1 As String = "C:\Users\tosaka\OneDrive - Micron Technology, Inc\mail_files\*.pdf"
     
     Dim objFso As FileSystemObject
     Set objFso = New FileSystemObject
     Dim destinationFile1 As String
     Dim destinationFile2 As String
     
-    destinationFile1 = "C:\Users\xxxx\OneDrive\test\PDF"
+    destinationFile1 = "C:\Users\tosaka\OneDrive - Micron Technology, Inc\mail_files"
     
-    ' FSOã«ã‚ˆã‚‹ãƒ•ã‚¡ã‚¤ãƒ«å‰Šé™¤
+    ' FSO‚É‚æ‚éƒtƒ@ƒCƒ‹íœ
     If (destinationFile1) <> "" Then
         objFso.DeleteFile cnsSOUR1
         Else
     End If
     
     Set objFso = Nothing
+    
 End Sub
 Sub move_files1()
+    
     Dim fso As New Scripting.FileSystemObject
     Dim sourceFile As String
     Dim destinationFile As String
     Dim currentdir As String
     
     
-    sourceFile = "C:\Users\xxxx\Documents\Mail_Files\test\*.xlsx"
-    destinationFile = "C:\Users\xxxx\OneDrive\test\Excel"
-    currentdir = "C:\Users\xxxx\Documents\Mail_Files\test"
+    sourceFile = "C:\Users\tosaka\Documents\Mail_Files\*.xlsx"
+    destinationFile = "C:\Users\tosaka\OneDrive - Micron Technology, Inc\mail_files\"
+    currentdir = "C:\Users\tosaka\Documents\Mail_Files\"
     
     If (currentdir) <> "" Then
         fso.MoveFile sourceFile, destinationFile
     End If
     
     Set fso = Nothing
-    
 End Sub
 Sub move_files2()
+
     Dim fso As New Scripting.FileSystemObject
     Dim sourceFile As String
     Dim destinationFile As String
     Dim currentdir As String
     
     
-    sourceFile = "C:\Users\xxxxx\Documents\Mail_Files\test\*.pdf"
-    destinationFile = "C:\Users\xxxx\OneDrive\test\PDF"
-    currentdir = "C:\Users\xxxx\Documents\Mail_Files\test"
+    sourceFile = "C:\Users\tosaka\Documents\Mail_Files\*.pdf"
+    destinationFile = "C:\Users\tosaka\OneDrive - Micron Technology, Inc\mail_files"
+    currentdir = "C:\Users\tosaka\Documents\Mail_Files"
     
     If (currentdir) <> "" Then
         fso.MoveFile sourceFile, destinationFile
