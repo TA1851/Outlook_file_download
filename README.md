@@ -21,6 +21,8 @@
   * Downloadファイルの保存先は、ドキュメントフォルダを指定
 
 ---
+<img src="https://github.com/TA1851/Outlook_file_download/blob/main/img/File_DL.png">
+
 #### Mail_list.bas -> 改訂版Macro(MacroName:File_Auto_Saving)
 
 * ダウンロードしたファイルをOneDriveに移動させる
