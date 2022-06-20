@@ -45,7 +45,7 @@
 
 【参考記事】
  
-* Outlook の予定表設定を行い、Alarm をトリガーとしmacro自動化を行う
+* Outlook の予定表設定を行い、Alarm をトリガーとしmacro実行の自動化を行う
 
   [マクロの自動化方法](https://extan.jp/?p=866&cpage=1&unapproved=1125&moderation-hash=02ff48a4830507554d307dde3b90caf0#:~:text=%E3%81%93%E3%81%AE%E3%83%9E%E3%82%AF%E3%83%AD%E3%82%92ThisOutlookSession%E3%81%AB%E8%BF%BD%E5%8A%A0)
 
