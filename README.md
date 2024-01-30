@@ -51,3 +51,8 @@
 * Library の追加（FileSystemObjectを利用するため）
 
   [FileSystemObjectの追加](https://www.tipsfound.com/vba/18001)
+
+---
+#### history
+
+2023.1.30 img/file_dl.png >>> 画像サイズ変更
